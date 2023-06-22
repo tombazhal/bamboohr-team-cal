@@ -1,0 +1,5 @@
+requests
+icalendar
+boto3
+python-dotenv
+pyyaml

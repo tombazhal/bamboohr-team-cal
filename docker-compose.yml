@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  bhrteamcal:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: bhrteamcal
+    volumes:
+      - ./:/app
+    environment:
+
+      #  SAVE_TO defines where to save the iCal file:
+      #    dospaces [default] - Upload to Digital Ocean Spaces or AWS S3
+      #    file - save to the local file. Path is defined in config.yml
+      - SAVE_TO=file
+
+      #  make the Python output unbuffered, i.e. display it immediately
+      - PYTHONUNBUFFERED=1
+
+    network_mode: "host"

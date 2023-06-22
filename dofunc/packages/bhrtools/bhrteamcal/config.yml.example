@@ -1,0 +1,47 @@
+# !! THIS IS AN EXAMPLE FILE!
+# !! Please copy it to config.yml and replace values with actual ones
+
+## timeoffs - define groups of time-off types and their respective options.
+#    Then you can execute the script using one of these groups' names.
+#
+#    Each time-off type has ID in BambooHR.
+#    You can get them using /meta/time_off/types/ API endpoint.
+#       See @https://documentation.bamboohr.com/reference/get-time-off-types
+
+## Variables description:
+#
+#  TO_TYPES - Comma-separated IDs of applicable BambooHR time-off types
+#  ICAL_NAME - Name of calendar in iCal file
+#  DO_SPACES_PATH - if saving to Digital Ocean Spaces (or AWS S3),
+#                    define path of the ics (iCal) file output
+#  FILE_PATH - if saving to the file (using Docker), define the path and name
+#               for the local file relative to main.py's directory.
+
+timeoffs:
+
+  - vac:
+      ICAL_NAME: "Developers Team - Vacations"
+      TO_TYPES: "2,3"
+      DO_SPACES_PATH: "ical/devteam/vac.ics"
+      FILE_PATH: "public/devteam-vac.ics"
+
+  - sick:
+      ICAL_NAME: "Developers Team - Sick Leaves"
+      TO_TYPES: "4,5"
+      DO_SPACES_PATH: "ical/devteam/sick.ics"
+      FILE_PATH: "public/devteam-sick.ics"
+
+
+## Next section defines variables related to information from BambooHR
+
+bamboohr:
+
+  # ID of the custom report which generates the team employees list
+
+  BAMBOOHR_TEAM_REPORT_ID: 123
+
+  #  Name template defining how each employee will be mentioned in iCal events
+  #  Field names from custom team report above should be used
+  #  Examples: "{firstName} {lastName}", "{preferredName}"
+
+  BAMBOOHR_NAME_TEMPLATE: "{firstName} {lastName}"
